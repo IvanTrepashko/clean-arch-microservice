@@ -1,0 +1,35 @@
+version: '3.8'
+services:
+  warehouse:
+    container_name: warehouse_api
+    depends_on:
+      - mongodb
+      - rabbitmq
+    build:
+      context: ./
+      dockerfile: ./WarehouseService.API/Dockerfile
+    ports:
+      - 5000:80
+      - 5001:443
+    networks:
+      - warehouse-network
+
+  mongodb:
+    container_name: warehouse_mongo
+    image: mongo
+    ports:
+      - 27017:27017
+    networks:
+      - warehouse-network
+
+  rabbitmq:
+    container_name: warehouse_rabbitmq
+    image: rabbitmq:3-management-alpine
+    ports: 
+      - 5672:5672
+      - 15672:15672
+    networks:
+      - warehouse-network
+
+networks:
+  warehouse-network:

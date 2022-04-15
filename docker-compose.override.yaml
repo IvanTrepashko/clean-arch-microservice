@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  warehouse:
+    environment:
+      - MongoDbOptions:MongoDbUsername=${MONGO_INITDB_ROOT_USERNAME}
+      - MongoDbOptions:MongoDbPassword=${MONGO_INITDB_ROOT_PASSWORD}
+      - MongoDbOptions:Host=${MONGO_HOST}
+      - RabbitMqOptions:Host=${RABBITMQ_HOST}
+      - RabbitMqOptions:Username=${RABBITMQ_USERNAME}
+      - RabbitMqOptions:Password=${RABBITMQ_PASSWORD}
+
+  mongodb:
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
